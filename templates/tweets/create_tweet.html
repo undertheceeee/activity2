@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Tweet</title>
+    <!-- Use Tailwind CSS for a clean, modern look -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container for the form -->
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-sm space-y-6">
+        <h2 class="text-2xl font-bold text-gray-800 text-center">Create a Tweet</h2>
+
+        <!-- The Django form -->
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <!-- This renders the Django form fields -->
+            <div>
+                {{ form.as_p }}
+            </div>
+
+            <!-- The submit button -->
+            <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                Post Tweet
+            </button>
+        </form>
+
+        <!-- Link back to the home page or logout -->
+        <div class="text-center mt-4">
+            <a href="{% url 'tweets:all-tweets' %}" class="text-blue-600 hover:underline">
+                View all tweets
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

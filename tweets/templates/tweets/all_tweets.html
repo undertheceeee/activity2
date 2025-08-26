@@ -1,0 +1,8 @@
+<h2>All Tweets</h2>
+<ul>
+  {% for tweet in tweets %}
+    <li><strong>{{ tweet.user.username }}</strong>: {{ tweet.content }} ({{ tweet.created_at }})</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'create_tweet' %}">Create a new tweet</a>
+<a href="{% url 'logout' %}">Logout</a>

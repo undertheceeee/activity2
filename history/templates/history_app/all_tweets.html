@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tweets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-start min-h-screen p-4">
+
+<div class="container bg-white shadow-xl rounded-xl p-8 space-y-6 mt-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">All Tweets</h1>
+        <a href="{% url 'create-tweet' %}"
+           class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out transform hover:scale-105">
+            + Create a Tweet
+        </a>
+    </div>
+
+    {% if tweets %}
+    <ul class="space-y-4">
+        {% for tweet in tweets %}
+        <li class="p-4 bg-gray-50 rounded-lg shadow-sm">
+            <p class="text-gray-800">{{ tweet.content }}</p>
+            <p class="text-xs text-gray-500 mt-1">posted by {{ tweet.user.username }} on {{ tweet.created_at|date:"M. d, Y, h:i a" }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-gray-500 text-center">No tweets found. Be the first to post!</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

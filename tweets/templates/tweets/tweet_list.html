@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Tweets</title>
+</head>
+<body>
+    <h1>All Tweets</h1>
+    <ul>
+        {% for tweet in tweets %}
+            <li>
+                <strong>{{ tweet.user.username }}</strong>: {{ tweet.content }}
+                <br>
+                <small>Posted on: {{ tweet.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No tweets have been posted yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

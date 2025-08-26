@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Tweet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+<div class="container bg-white shadow-xl rounded-xl p-8 space-y-6">
+    <div class="flex justify-between items-center">
+        <h1 class="text-3xl font-bold text-gray-800">Create a New Tweet</h1>
+        <a href="{% url 'tweets:create_tweet' %}"
+           class="text-blue-600 hover:underline font-semibold">Back to Tweets</a>
+    </div>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div class="flex flex-col">
+            <label for="content" class="text-gray-700 font-medium mb-2">Tweet Content (Max 200 characters)</label>
+            <textarea id="content" name="content" rows="4" maxlength="200" required
+                      class="resize-none p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"></textarea>
+            <div id="char-count" class="text-sm text-gray-500 mt-1 self-end">0/200</div>
+        </div>
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition-all duration-200 ease-in-out transform hover:scale-105">
+            Post Tweet
+        </button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contentInput = document.getElementById('content');
+        const charCountDisplay = document.getElementById('char-count');
+
+        contentInput.addEventListener('input', () => {
+            const count = contentInput.value.length;
+            charCountDisplay.textContent = `${count}/200`;
+        });
+    });
+</script>
+</body>
+</html>

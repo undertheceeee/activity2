@@ -1,0 +1,7 @@
+<h2>Your Tweet History</h2>
+<ul>
+  {% for entry in history %}
+    <li>{{ entry.summary }}</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'all-tweets' %}">Back to tweets</a>

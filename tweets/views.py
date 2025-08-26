@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import TweetForm
 from .models import Tweet
+from django.urls import reverse
 
 @login_required
 def create_tweet(request):
@@ -14,14 +15,32 @@ def create_tweet(request):
             return redirect('tweet_success')
     else:
         form = TweetForm()
-    return render(request, 'tweets/create_tweet.html', {'form': form})
+    return redirect('tweets:list')
 
 
 def tweet_success(request):
     return render(request, 'tweets/success.html')
+
 def all_tweets_view(request):
-    tweets = Tweet.objects.all().order_by('-created_at')
-    return render(request, 'tweets/all_tweets.html', {'tweets': tweets})
+    """
+    Retrieves all tweets and displays them.
+    """
+    all_tweets = Tweet.objects.all().order_by('-created_at')
+
+    context = {
+        'tweets': all_tweets,
+        'create_url': reverse('tweets:create'),
+    }
+
+    return render(request, 'tweets/tweet_list.html', context)
+
+
+def create_tweet(request):
+    # ... your code to create the tweet ...
+    if form.is_valid():
+        # ... save tweet ...
+        return redirect('tweets:tweet_success')
+    # ...
 def tweet_view(request):
     if request.method == 'POST':
         # Create a form instance from the submitted data

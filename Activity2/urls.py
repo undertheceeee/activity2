@@ -30,6 +30,7 @@ urlpatterns = [
     path('tweets/', include('tweets.urls', namespace='tweets')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('tweets/', include('tweets.urls', namespace='tweets')),
+    path('tweets/', include('tweets.urls')),
 
 ]
 

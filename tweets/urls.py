@@ -17,6 +17,9 @@ urlpatterns = [
     path('create/', views.create_tweet, name='create'),
     path('create/', create_tweet, name='create_tweet'),
     path('', all_tweets_view, name='all-tweets'),
+    path('create/', create_tweet, name='create_tweet'),
+    path('success/', views.tweet_success, name='tweet_success'),
+
 
 
 
